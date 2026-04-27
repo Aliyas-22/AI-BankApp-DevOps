@@ -64,13 +64,13 @@ jobs:
 
       - name: Update Kubernetes deployment manifest
         run: |
+          git pull origin feat/gitops --rebase
           sed -i "s|image: ${{ env.DOCKERHUB_REPO }}:.*|image: ${{ env.DOCKERHUB_REPO }}:${{ steps.tag.outputs.sha_short }}|" k8s/bankapp-deployment.yml
 
       - name: Commit updated manifest
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull origin feat/gitops --rebase
           git add k8s/bankapp-deployment.yml
           git diff --staged --quiet || git commit -m "ci: update bankapp image to ${{ steps.tag.outputs.sha_short }} [skip ci]"
           git push origin feat/gitops 
