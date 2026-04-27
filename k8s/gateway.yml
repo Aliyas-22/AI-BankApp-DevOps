@@ -31,7 +31,7 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: 52.32.92.48.nip.io
+      #hostname: 52.32.92.48.nip.io
       allowedRoutes:
         namespaces:
           from: Same
@@ -42,8 +42,8 @@ metadata:
   name: bankapp-route
   namespace: bankapp
 spec:
-  hostnames:
-    - 52.32.92.48.nip.io
+  #hostnames:
+   # - 52.32.92.48.nip.io
   parentRefs:
     - group: gateway.networking.k8s.io
       kind: Gateway
